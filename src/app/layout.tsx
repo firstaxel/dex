@@ -1,7 +1,6 @@
-import AuthProvider from "@/providers/AuthProvider";
 import "./globals.css";
 import { Epilogue } from "next/font/google";
-import ToasterProvider from "@/providers/ToasterProvider";
+import { Providers } from "@/providers/Providers";
 
 const epilogue = Epilogue({ subsets: ["latin"] });
 
@@ -17,9 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={` bg-gray-100`}>
-        <ToasterProvider />
-        <AuthProvider>{children}</AuthProvider>
+      <body className={` ${epilogue.className} bg-gray-100`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

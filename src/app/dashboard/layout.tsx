@@ -11,13 +11,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <main className="w-[80%] ml-auto">
-          <DesktopSidebar />
-          {children}
-        </main>
-      </body>
-    </html>
+    <main className="w-[80%] ml-auto">
+      <DesktopSidebar />
+      {children}
+    </main>
   );
 }

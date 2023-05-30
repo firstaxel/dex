@@ -63,7 +63,8 @@ const AuthForm = () => {
             toast.error("Invalid credentials!");
           }
 
-          if (callback?.ok) {
+          if (callback?.ok && !callback.error) {
+            toast.success("Account successfully created");
             router.push("/dashboard");
           }
         })
@@ -81,7 +82,9 @@ const AuthForm = () => {
             toast.error("Invalid credentials!");
           }
 
-          if (callback?.ok) {
+          if (callback?.ok && !callback.error) {
+            toast.success("Login successful");
+
             router.push("/dashboard");
           }
         })
@@ -98,11 +101,18 @@ const AuthForm = () => {
           toast.error("Invalid credentials!");
         }
 
-        if (callback?.ok) {
+        if (callback?.ok && !callback.error) {
+          toast.success("Social Login Successful");
+
           router.push("/dashboard");
         }
       })
-      .finally(() => setIsLoading(false));
+      .catch((error) => {
+        toast.error("Something went wrong, Please try again");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

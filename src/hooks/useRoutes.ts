@@ -6,10 +6,21 @@ import { BsCardList } from "react-icons/bs";
 import { HiArrowLeftOnRectangle, HiHome, HiPlus } from "react-icons/hi2";
 import useGiftcard from "@/hooks/useGiftcard";
 import { signOut } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 const useRoutes = () => {
   const pathname = usePathname();
   const { giftcardId } = useGiftcard();
+
+  const handleLogout = () => {
+    signOut({ redirect: false })
+      .then(() => {
+        toast.success("Logged out successfully");
+      })
+      .catch((error) => {
+        toast.error("There was a problem logging you out");
+      });
+  };
 
   const routes = useMemo(
     () => [
@@ -53,7 +64,7 @@ const useRoutes = () => {
         label: "Logout",
         href: "#",
         icon: HiArrowLeftOnRectangle,
-        onClick: () => signOut(),
+        onClick: () => handleLogout(),
       },
     ],
     [pathname, giftcardId]
